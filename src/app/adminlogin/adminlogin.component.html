@@ -1,0 +1,22 @@
+<app-header></app-header>
+<div 
+class="item-link"
+     fxLayout="column"
+     fxLayoutGap="10px">
+<h3>Admin Login</h3>
+<br>
+<mat-card>
+  <mat-card-content>
+      <mat-form-field >
+            <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field >
+          <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
+      </mat-form-field>
+  </mat-card-content>
+  <br>
+    <button mat-raised-button (click)="login()" color="primary">Login</button>
+</mat-card>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,19 @@
+<div class="container jumbotron"
+    fxLayout="row"
+    fxLayout.sm="column" 
+    fxLayout.xs="column" 
+    fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" 
+    fxLayoutAlign.gt-sm="center center" 
+    fxLayoutGap="10px">
+  <div fxFlex fxFlex.gt-sm="20%">
+    <img src="/assets/images/logo.png" alt="Logo">
+  </div>
+  <div fxFlex> 
+  </div>
+</div>
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/livematches" routerLinkActive="active"><span class="fa fa-home fa-lg"></span> LiveMatches</a>
+  <a mat-button routerLink="/prevmatches" routerLinkActive="active"><span class="fa fa-info fa-lg"></span> PreviousMatches</a>
+  <a mat-button routerLink="/adminlogin" routerLinkActive="active"><span class="fa fa-list fa-lg"></span> Admin Login</a>
+</mat-toolbar>

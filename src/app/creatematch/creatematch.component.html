@@ -1,0 +1,30 @@
+<app-adminheader></app-adminheader>
+<div fxFlex fxFlexOffset="20px" class="form-size">
+  <h3>Enter Match</h3>
+<form novalidate [formGroup]="matchForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+  <p>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="teama"  placeholder="Team1" type="text" >
+    </mat-form-field> 
+    <mat-form-field class="full-width">
+      <input matInput formControlName="teamb"  placeholder="Team2" type="text" >
+    </mat-form-field> 
+    <mat-form-field class="full-width">
+      <input matInput formControlName="date"  placeholder="date" type="text" >
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="location"  placeholder="Location" type="text" >
+    </mat-form-field> 
+    <mat-form-field class="full-width">
+      <input matInput formControlName="winner"  placeholder="Winner" type="text" >
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="live"  placeholder="Live" type="boolean" >
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput formControlName="status"  placeholder="Status" type="text" >
+    </mat-form-field>
+  </p>
+  <button type="submit" mat-button class="background-primary text-floral-white" >Submit</button>
+</form>
+</div>

@@ -1,0 +1,41 @@
+<div *ngIf="match" fxFlex style="background-color: rgb(229, 255, 0);">
+  <h2>ScoreBoard</h2>
+  <div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px" >
+
+  <mat-list fxFlex >
+    <mat-list-item class="item-link">
+      <img matListAvatar src={{match.imagea}} alt={{match.teama}}>
+      <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>
+      <p matLine>
+        <span> {{match.status}} </span>
+      </p>
+      <div>
+        <img matListAvatar src={{match.imageb}} alt={{match.teamb}}>
+      </div>
+    </mat-list-item>
+  </mat-list>
+  <div class="item-link">
+    <h2>{{match.teama}} Score :</h2>
+    <h1> {{ match.ascore.runs }} / {{ match.ascore.overs }} </h1>  
+    <h1>Wikets: {{ match.ascore.wickets }} </h1>    
+  </div>
+  <br>
+  <div class="item-link">
+    <h2>{{match.teamb}} Score :</h2>
+    <h1> {{ match.bscore.runs }} / {{ match.bscore.overs }} </h1>  
+    <h1>Wikets: {{ match.bscore.wickets }} </h1>    
+  </div>
+  <div class="item-link">
+    <p>Match at location {{match.location}} </p>
+    <div *ngIf="match.live == true">
+      <p>Match is running Live </p>
+    </div>
+    <div *ngIf="match.live == false">
+      <p>Match Completed </p>
+    </div>
+    <p> {{ match.status }} </p>
+  </div>
+</div>
+</div>
