@@ -3,20 +3,28 @@
 <div class="container"
      fxLayout="column"
      fxLayoutGap="10px">
-
-  <mat-list fxFlex *ngFor="let match of matches" >
-    <mat-list-item *ngIf="match.live == false" class="item-link"  (click)="gotoScore()">
-      <img matListAvatar src={{match.imagea}} alt={{match.teama}}>
+  <div fxFlex *ngIf="matches" [@expand]>
+  <mat-list *ngFor="let match of matches?.reverse()" >
+    <mat-list-item *ngIf="match.live == false" class="item-link" [routerLink]="['/matchdetail', match.id]" appHighlight>
+      <img matListAvatar src="{{ BaseURL + match.imagea}}" alt={{match.teama}}>
       <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>
       <p matLine>
         <span> {{match.status}} </span>
       </p>
       <div>
-        <img matListAvatar src={{match.imageb}} alt={{match.teamb}}>
+        <img matListAvatar src="{{ BaseURL + match.imageb}}" alt={{match.teamb}}>
       </div>
       <hr/>
     </mat-list-item>
   </mat-list>
+  </div>
+  <div [hidden]="matches || errMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
 
 </div>
 <app-footer></app-footer>

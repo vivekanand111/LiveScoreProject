@@ -3,19 +3,30 @@
 <div class="container"
      fxLayout="column"
      fxLayoutGap="10px" >
-
-  <mat-list fxFlex *ngFor="let match of matches">
-    <mat-list-item *ngIf="match.live == true" class="item-link" (click)="gotoScore()" >
-      <img matListAvatar src={{match.imagea}} alt={{match.teama}}>
+     <div fxLayoutAlign="center">
+       <button mat-button (click)="refresh()" class="but text-floral-white">Refresh</button>
+     </div>
+  <div fxFlex *ngIf="matches" [@visibility]="visibility" [@expand]>
+  <mat-list  *ngFor="let match of matches?.reverse()" >
+    <mat-list-item *ngIf="match.live == true" [routerLink]="['/matchdetail', match.id]" appHighlight class="item-link">
+      <img matListAvatar src="{{ BaseURL + match.imagea }}" alt={{match.teama}}>
       <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>
       <p matLine>
         <span> {{match.status}} </span>
       </p>
       <div>
-        <img matListAvatar src={{match.imageb}} alt={{match.teamb}}>
+        <img matListAvatar src="{{ BaseURL + match.imageb}}" alt={{match.teamb}}>
       </div>
     </mat-list-item>
   </mat-list>
+  </div>
+  <div [hidden]="matches || matchErrMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+  <div fxFlex *ngIf="matchErrMess">
+    <h2>Error</h2>
+    <h4>{{matchErrMess}}</h4>
+  </div>
 
 </div>
 <app-footer></app-footer>

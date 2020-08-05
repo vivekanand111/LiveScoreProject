@@ -1,39 +1,125 @@
 <div fxFlex fxFlexOffset="20px" class="form-size">
-  <h3>Edit Scores</h3>
-
-<form novalidate [formGroup]="matchForm1" #fform="ngForm" (ngSubmit)="onSubmit1()">
-  Team1 Score
-<div>
-  <mat-form-field class="full-width">
-    <input matInput formControlName="overs"  placeholder="Overs" type="number" >
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <input matInput formControlName="runs"  placeholder="Runs" type="number" >
-  </mat-form-field> 
-  <mat-form-field class="full-width">
-    <input matInput formControlName="wickets"  placeholder="Wickets" type="number" >
-  </mat-form-field>
-</div>
-<button type="submit" mat-button class="background-primary text-floral-white" >Update</button>
-</form>
-<div>
-  <br>
-</div>
-<form novalidate [formGroup]="matchForm2" #fform="ngForm" (ngSubmit)="onSubmit2()">
-Team2 Score
-<div>
-  <mat-form-field class="full-width">
-    <input matInput formControlName="overs"  placeholder="Overs" type="number" >
-  </mat-form-field>
-  <mat-form-field class="full-width">
-    <input matInput formControlName="runs"  placeholder="Runs" type="number" >
-  </mat-form-field> 
-  <mat-form-field class="full-width">
-    <input matInput formControlName="wickets"  placeholder="Wickets" type="number" >
-  </mat-form-field>
-</div>
-<button type="submit" mat-button class="background-primary text-floral-white" >Update</button>
-</form>
-<br>
-<button mat-raised-button (click)="end()" color="primary">End</button>
+  <div fxFlex="10">
+    <h3 >Edit Scores</h3>
+  </div>
+  <div fxFlex="20" *ngIf="match" [@visibility]="visibility">
+    <form novalidate [formGroup]="matchForm1" #fform="ngForm" (ngSubmit)="onSubmit1()">
+     <p style="color: darkblue;"> {{match.teama}} Score (Team-1)</p>
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="aovers" min="0" placeholder="Overs" type="number" >
+          <mat-hint>
+            <span [hidden]="!(formErrors.overs)">
+                {{formErrors.overs}}</span>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="aruns" min="0" placeholder="Runs" type="number" >
+          <mat-hint>
+            <span [hidden]="!(formErrors.runs)">
+                {{formErrors.runs}}</span>
+          </mat-hint>
+        </mat-form-field> 
+      </p>
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="awickets" min="0" max="10" placeholder="Wickets" type="number" >
+          <mat-hint>
+            <span [hidden]="!(formErrors.wickets)">
+                {{formErrors.wickets}}</span>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+    <button type="submit" mat-button class="background-primary text-floral-white"
+    [disabled]="matchForm1.invalid">Update</button>
+    </form>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+  <div>
+    <h1></h1>
+  </div>
+  <div fxFlex="20" *ngIf="match" [@visibility]="visibility">
+    <form novalidate [formGroup]="matchForm2" #fform="ngForm" (ngSubmit)="onSubmit2()">
+      <p style="color: darkblue;"> {{match.teamb}} Score (Team-2)</p>
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="bovers" min="0"  placeholder="Overs" type="number" >
+          <mat-hint>
+            <span [hidden]="!(formErrors.overs)">
+                {{formErrors.overs}}</span>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="bruns" min="0"  placeholder="Runs" type="number" >
+          <mat-hint>
+            <span [hidden]="!(formErrors.runs)">
+                {{formErrors.runs}}</span>
+          </mat-hint>
+        </mat-form-field> 
+      </p>
+      <p>
+        <mat-form-field class="full-width">
+          <input matInput formControlName="bwickets" min="0" max="10" placeholder="Wickets" type="number" >
+          <mat-hint>
+            <span [hidden]="!(formErrors.wickets)">
+                {{formErrors.wickets}}</span>
+          </mat-hint>
+        </mat-form-field>
+      </p>
+    <button type="submit" mat-button class="background-primary text-floral-white"
+    [disabled]="matchForm2.invalid">Update</button>
+    </form>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+  <div fxFlex="30" *ngIf="match" [@visibility]="visibility">
+    <form #fform="ngForm" novalidate [formGroup]="matchForm3" (ngSubmit)="updateStatus()">
+     <p style="color: darkblue;">Update Status</p>
+     <mat-form-field class="half-width">
+      <input matInput formControlName="status"  placeholder="Status" type="text" required>
+      <mat-error *ngIf="formErrors.status">
+        {{formErrors.status}}
+      </mat-error>
+    </mat-form-field>
+    <table class="form-size">
+      <p style="color: darkblue;">Change Batting-Team after Innings</p>
+      <tr>
+        <mat-select class="half-width" placeholder="Batting-Team" formControlName="battingteam">
+          <mat-option *ngFor="let mtype of battingteam" [value]="mtype">
+            {{ mtype }}
+          </mat-option>
+        </mat-select>
+      </tr>
+      <h1></h1>
+      <p style="color: darkblue;">Select Winnner</p>
+      <tr>
+        <mat-select class="half-width" placeholder="Winner?" formControlName="winner">
+          <mat-option *ngFor="let a of winner" [value]="a">
+            {{ a }}
+          </mat-option>
+        </mat-select>
+      </tr>
+    </table>
+    <h1></h1>
+    <button type="submit" mat-button class="background-primary text-floral-white"
+    [disabled]="matchForm3.invalid">Update</button>
+    </form>
+  </div>
+  <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+  <div fxFlex >
+    <p>End Match</p>
+    <button mat-button (click)="end()" class="but text-floral-white">Finish Match</button>
+  </div>
 </div>

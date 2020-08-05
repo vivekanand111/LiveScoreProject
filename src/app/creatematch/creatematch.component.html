@@ -1,30 +1,68 @@
 <app-adminheader></app-adminheader>
 <div fxFlex fxFlexOffset="20px" class="form-size">
   <h3>Enter Match</h3>
-<form novalidate [formGroup]="matchForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+<form novalidate [formGroup]="matchForm" #fform="ngForm" (ngSubmit)="onSubmit()" *ngIf="showForm" [@expand]>
   <p>
-    <mat-form-field class="full-width">
-      <input matInput formControlName="teama"  placeholder="Team1" type="text" >
+    <mat-form-field class="half-width">
+      <input matInput formControlName="teama"  placeholder="Team1" type="text" required >
+      <mat-error *ngIf="formErrors.teama">
+        {{formErrors.teama}}
+      </mat-error>
     </mat-form-field> 
-    <mat-form-field class="full-width">
-      <input matInput formControlName="teamb"  placeholder="Team2" type="text" >
+    <mat-form-field class="half-width">
+      <input matInput formControlName="teamb"  placeholder="Team2" type="text" required>
+      <mat-error *ngIf="formErrors.teamb">
+        {{formErrors.teamb}}
+      </mat-error>
     </mat-form-field> 
-    <mat-form-field class="full-width">
-      <input matInput formControlName="date"  placeholder="date" type="text" >
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <input matInput formControlName="location"  placeholder="Location" type="text" >
+    <mat-form-field class="half-width">
+      <input matInput formControlName="location"  placeholder="Location" type="text" required>
+      <mat-error *ngIf="formErrors.location">
+        {{formErrors.location}}
+      </mat-error>
     </mat-form-field> 
-    <mat-form-field class="full-width">
-      <input matInput formControlName="winner"  placeholder="Winner" type="text" >
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <input matInput formControlName="live"  placeholder="Live" type="boolean" >
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <input matInput formControlName="status"  placeholder="Status" type="text" >
+    <mat-form-field class="half-width">
+      <input matInput formControlName="status"  placeholder="Status" type="text" required>
+      <mat-error *ngIf="formErrors.status">
+        {{formErrors.status}}
+      </mat-error>
     </mat-form-field>
   </p>
-  <button type="submit" mat-button class="background-primary text-floral-white" >Submit</button>
+  <table class="form-size">
+    <h3>Select Match-Type</h3>
+    <tr>
+      <mat-select class="half-width" placeholder="MatchType?" formControlName="matchType">
+        <mat-option *ngFor="let mtype of matchType" [value]="mtype">
+          {{ mtype }}
+        </mat-option>
+      </mat-select>
+    </tr>
+    <h3>Select Batting-Team</h3>
+    <tr>
+      <mat-select class="half-width" placeholder="BattingTeam?" formControlName="battingteam">
+        <mat-option *ngFor="let bat of battingteam" [value]="bat">
+          {{ bat }}
+        </mat-option>
+      </mat-select>
+    </tr>
+  </table>
+  <h1></h1>
+  <button type="submit" mat-button class="background-primary text-floral-white"
+      [disabled]="matchForm.invalid">Submit</button>
 </form>
+  <div [hidden]="showForm || submitted" [@expand]>
+    <h3>Creating Match ..</h3>
+    <mat-spinner></mat-spinner>
+  </div>
+  <div *ngIf="submitted" [@expand]>
+    <h3>Your Submission</h3>
+      <p>Team1 : {{submitted.teama}}</p>
+      <p>Team2 : {{submitted.teamb}}</p>
+      <p>Location : {{submitted.location}}</p>
+      <p>Match-Type : {{submitted.matchType}}</p>
+      <p>Batting-Team : {{submitted.battingteam}}</p>
+  </div>
+  <div *ngIf="submitted" [@expand]>
+    <button type="submit" [routerLink]="['/editscore', submitted.id]" mat-button class="background-primary text-floral-white">Edit Scores</button>
+  </div>
 </div>

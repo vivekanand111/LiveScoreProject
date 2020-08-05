@@ -1,26 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { MATCHES } from '../shared/matches'
-import { MatchService } from '../services/match.service';
+import { Component, OnInit, Inject} from '@angular/core';
 import { Match } from '../shared/match';
-import { Router } from '@angular/router';
+import { MatchService } from '../services/match.service';
+import { visibility, flyInOut, expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-livematches',
   templateUrl: './livematches.component.html',
-  styleUrls: ['./livematches.component.scss']
+  styleUrls: ['./livematches.component.scss'],
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+    },
+    animations: [
+      visibility(),
+      flyInOut(),
+      expand()
+    ]
 })
 export class LivematchesComponent implements OnInit {
 
-  matches = MATCHES;
-  match: Match;
+  matches: Match[];
+  errMess: string;
+  visibility = 'shown';
+  selectedMatch: Match;
 
   constructor(private matchService: MatchService,
-    private router:Router) { }
-
+    @Inject('BaseURL') private BaseURL) { }
+  
   ngOnInit() {
-      this.match = this.matchService.getLiveMatch();
+    this.visibility = 'hidden';
+    this.matchService.getMatches()
+      .subscribe(matches => { this.matches = matches; this.visibility = 'shown'; },
+        errmess => this.errMess = <any>errmess); 
   }
-  gotoScore(): void {
-    this.router.navigate(['/scorecard']);
+  onSelect(match: Match) {
+    this.selectedMatch = match;
+  }
+  refresh(){
+    this.ngOnInit();
   }
 }

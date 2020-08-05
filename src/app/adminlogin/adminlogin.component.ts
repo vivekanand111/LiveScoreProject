@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-adminlogin',
@@ -8,19 +9,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AdminloginComponent implements OnInit {
 
-  username: string;
-  password: string;
+  user = {username: '', password: '', remember: false};
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,public dialogRef: MatDialogRef<AdminloginComponent>) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
-  login() : void {
-    if(this.username == 'admin' && this.password == 'admin'){
+  onSubmit() {
+    console.log('User: ', this.user);
+    if (this.user.username=="admin" && this.user.password=="admin"){
       this.router.navigate(['/admindashboard']);
-     //alert("Successfully logged!");
-    }else {
+    }else{
       alert("Invalid credentials");
     }
+    this.dialogRef.close();
   }
 }

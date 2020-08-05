@@ -6,9 +6,8 @@ import { AdminloginComponent } from '../adminlogin/adminlogin.component';
 import { AdmindashboardComponent } from '../admindashboard/admindashboard.component';
 import { CreatematchComponent } from '../creatematch/creatematch.component';
 import { EditscoreComponent } from '../editscore/editscore.component';
-import { ChangestatusComponent } from '../changestatus/changestatus.component';
 import { FinishmatchComponent } from '../finishmatch/finishmatch.component';
-import { ScorecardComponent } from '../scorecard/scorecard.component';
+import { MatchdetailsComponent } from '../matchdetails/matchdetails.component';
 
 export const routes: Routes = [
     { path: 'livematches', component: LivematchesComponent },
@@ -16,9 +15,8 @@ export const routes: Routes = [
     { path: 'adminlogin', component: AdminloginComponent },
     { path: 'admindashboard', component: AdmindashboardComponent },
     { path: 'creatematch', component: CreatematchComponent },
-    { path: 'editscore', component: EditscoreComponent },
-    { path: 'changestatus', component: ChangestatusComponent },
+    { path: 'editscore/:id', component: EditscoreComponent },
     { path: 'finishmatch', component: FinishmatchComponent },
-    { path: 'scorecard', component: ScorecardComponent },
+    { path: 'matchdetail/:id', component: MatchdetailsComponent },
     { path: '', redirectTo: '/livematches', pathMatch: 'full' }
 ];

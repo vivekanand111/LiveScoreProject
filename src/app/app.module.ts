@@ -1,47 +1,48 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar'; 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
-
-import {MatDividerModule} from '@angular/material/divider'; 
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
-import { MatSelectModule } from '@angular/material/select';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ReactiveFormsModule } from '@angular/forms';
-
-import { LivematchesComponent } from './livematches/livematches.component';
-import { PrevmatchesComponent } from './prevmatches/prevmatches.component';
-import { AdminloginComponent } from './adminlogin/adminlogin.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import {MatTableModule} from '@angular/material/table'; 
-
-import { MatchService } from './services/match.service';
-import { AppRoutingModule } from './app-routing/app-routing.module';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-
-
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { ScorecardComponent } from './scorecard/scorecard.component';
-import { GraphComponent } from './graph/graph.component';
+import { MatSliderModule } from '@angular/material/slider'; 
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+
+import { AppComponent } from './app.component';
+import 'hammerjs';
+
 import { AdminheaderComponent } from './adminheader/adminheader.component';
 import { CreatematchComponent } from './creatematch/creatematch.component';
-import { ChangestatusComponent } from './changestatus/changestatus.component';
 import { EditscoreComponent } from './editscore/editscore.component';
 import { FinishmatchComponent } from './finishmatch/finishmatch.component';
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component'; 
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { MatchdetailsComponent } from './matchdetails/matchdetails.component'; 
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { LivematchesComponent } from './livematches/livematches.component';
+import { PrevmatchesComponent } from './prevmatches/prevmatches.component';
+
+import { MatchService } from './services/match.service';
+import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
+
+import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AdminloginComponent } from './adminlogin/adminlogin.component';
+
+
+import { baseURL } from './shared/baseurl';
+import { HighlightDirective } from './directives/highlight.directive';
 
 @NgModule({
   declarations: [
@@ -51,37 +52,41 @@ import { AdmindashboardComponent } from './admindashboard/admindashboard.compone
     AdminloginComponent,
     HeaderComponent,
     FooterComponent,
-    ScorecardComponent,
-    GraphComponent,
     AdminheaderComponent,
     CreatematchComponent,
-    ChangestatusComponent,
     EditscoreComponent,
     FinishmatchComponent,
-    AdmindashboardComponent
+    AdmindashboardComponent,
+    MatchdetailsComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    HttpClientModule,
     MatToolbarModule,
-    MatDividerModule,
     MatListModule,
     MatGridListModule,
     MatCardModule,
     MatButtonModule,
-    FlexLayoutModule,
-    MatTableModule,
+    MatDialogModule,
     MatFormFieldModule, 
     MatInputModule,
     MatCheckboxModule,
-    FormsModule,
-    MatDialogModule,
     MatSelectModule,
     MatSlideToggleModule,
-    ReactiveFormsModule,
-    AppRoutingModule
+    MatSliderModule,
+    MatProgressSpinnerModule
   ],
-  providers: [MatchService],
+  providers: [
+    MatchService,
+    ProcessHTTPMsgService,
+    {provide: 'BaseURL', useValue: baseURL}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

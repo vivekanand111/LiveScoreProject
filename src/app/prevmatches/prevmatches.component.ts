@@ -1,25 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { MATCHES } from '../shared/matches'
+import { Component, OnInit, Inject } from '@angular/core';
+
 import { MatchService } from '../services/match.service';
 import { Match } from '../shared/match';
-import { Router } from '@angular/router';
+import { flyInOut, expand } from '../animations/app.animation';
+
 @Component({
   selector: 'app-prevmatches',
   templateUrl: './prevmatches.component.html',
-  styleUrls: ['./prevmatches.component.scss']
+  styleUrls: ['./prevmatches.component.scss'],
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+    flyInOut(),
+    expand()
+  ]
 })
 export class PrevmatchesComponent implements OnInit {
 
-  matches = MATCHES;
-  match: Match;
+  matches: Match[];
+  errMess: string;
+
+  selectedMatch: Match;
 
   constructor(private matchService: MatchService,
-    private router:Router) { }
-
+    @Inject('BaseURL') private BaseURL) { }
+  
   ngOnInit() {
-      this.match = this.matchService.getLiveMatch();
+    this.matchService.getMatches()
+      .subscribe(matches => this.matches = matches,
+        errmess => this.errMess = <any>errmess);    
   }
-  gotoScore(): void {
-    this.router.navigate(['/scorecard']);
+  onSelect(match: Match) {
+    this.selectedMatch = match;
   }
 }

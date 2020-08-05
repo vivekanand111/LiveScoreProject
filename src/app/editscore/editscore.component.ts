@@ -1,54 +1,151 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { MatchService } from '../services/match.service';
+import { Match, MatchType, BattingTeam, Winner  } from '../shared/match';
+
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 
-
-import { score } from '../shared/score';
-import { Match } from '../shared/match';
-import { from } from 'rxjs';
+import { Params, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
+import { visibility, flyInOut, expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-editscore',
   templateUrl: './editscore.component.html',
-  styleUrls: ['./editscore.component.scss']
+  styleUrls: ['./editscore.component.scss'],
+  // tslint:disable-next-line:use-host-property-decorator
+  host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+  },
+  animations: [
+    visibility(),
+    flyInOut(),
+    expand()
+  ]
 })
 export class EditscoreComponent implements OnInit {
+
+  battingteam = BattingTeam;
+  winner = Winner;
+  errMess: String;
+  match: Match;
+  matchIds: string[];
   matchForm1: FormGroup;
   matchForm2: FormGroup;
-  team1: score;
-  team2: score;
+  matchForm3: FormGroup;
+  matchcopy: Match;  
+  visibility = 'shown';
 
-  constructor(private fb: FormBuilder,
-    private router: Router) { 
-    this.createForm();
+  formErrors = {
+    'runs': '',
+    'overs': '',
+    'wickets': ''
+  };
+
+  validationMessages = {
+    'runs': {
+      'required':      'runs is required.'
+    },
+    'overs': {
+      'required':      'overs is required.'
+    },
+    'wickets': {
+      'required':      'wickets is required.'
+    }
+  };
+
+  constructor(private matchservice: MatchService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private locationl : Location,
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) { 
   }
+
 
   ngOnInit() {
+    this.createForm();
+
+    this.matchservice.getMatchIds().subscribe(matchIds => this.matchIds = matchIds);
+    this.route.params.pipe(
+      switchMap((params: Params) => { 
+      this.visibility = 'hidden'; 
+      return this.matchservice.getMatch(params['id']); }))
+    .subscribe(match => {
+      this.match = match;
+      this.matchcopy = match;
+      console.log(this.matchcopy)
+      this.visibility = 'shown';
+    },
+    errmess => this.errMess = <any>errmess);
+
   }
   createForm() {
-    this.matchForm1= this.fb.group({
-        overs:0,
-        runs:0,
-        wickets:0
+    this.matchForm1 = this.fb.group({
+      aovers: ['', [Validators.required ]],
+      aruns : ['',[Validators.required ]],
+      awickets : ['', [Validators.required] ]      
     });
-    this.matchForm2= this.fb.group({
-      overs:0,
-      runs:0,
-      wickets:0
-  });
+    this.matchForm2 = this.fb.group({
+      bovers: ['', [Validators.required ]],
+      bruns : ['',[Validators.required ]],
+      bwickets : ['', [Validators.required] ]      
+    });
+    this.matchForm3 = this.fb.group({
+      winner:'None',
+      battingteam:'',
+      status:''
+    });
   }
 
   onSubmit1() {
-    this.team1 = this.matchForm1.value;
-    //this.cmatch.match.ascore= this.team1;
-    console.log(this.team1);
+    this.matchcopy.aovers=Number(this.matchForm1.value.aovers);
+    this.matchcopy.aruns=Number(this.matchForm1.value.aruns);
+    this.matchcopy.awickets=Number(this.matchForm1.value.awickets);
+    console.log(this.matchcopy);
+    this.matchservice.putMacth(this.matchcopy)
+      .subscribe(match => {
+        this.match = match; this.matchcopy = match;
+      },
+      errmess => { this.match = null; this.matchcopy = null; this.errMess = <any>errmess; });
+      alert("Sucessfully Updated Score");
   }
+
   onSubmit2() {
-    this.team2 = this.matchForm2.value;
-    //this.match.bscore = this.team2;
-    console.log(this.team2);
+    this.matchcopy.bovers=Number(this.matchForm2.value.bovers);
+    this.matchcopy.bruns=Number(this.matchForm2.value.bruns);
+    this.matchcopy.bwickets=Number(this.matchForm2.value.bwickets);
+    console.log(this.matchcopy);
+    this.matchservice.putMacth(this.matchcopy)
+      .subscribe(match => {
+        this.match = match; this.matchcopy = match;
+      },
+      errmess => { this.match = null; this.matchcopy = null; this.errMess = <any>errmess; });
+    alert("Sucessfully Updated Score");
   }
-  end() : void {
-    this.router.navigate(['/finishmatch']);
+  updateStatus() {
+    this.matchcopy.winner=this.matchForm3.value.winner;
+    this.matchcopy.battingteam=this.matchForm3.value.battingteam;
+    this.matchcopy.status=this.matchForm3.value.status;
+    console.log(this.matchcopy);
+    this.matchservice.putMacth(this.matchcopy)
+      .subscribe(match => {
+        this.match = match; this.matchcopy = match;
+      },
+      errmess => { this.match = null; this.matchcopy = null; this.errMess = <any>errmess; });
+    alert("Sucessfully Updated Status");
+  }
+  end(){
+    this.matchcopy.live=false;
+    console.log(this.matchcopy);
+    this.matchservice.putMacth(this.matchcopy)
+      .subscribe(match => {
+        this.match = match; this.matchcopy = match;
+      },
+      errmess => { this.match = null; this.matchcopy = null; this.errMess = <any>errmess; });
+    alert("Sucessfully Finshed Match");
+    this.router.navigate(['/admindashboard']);
   }
 }

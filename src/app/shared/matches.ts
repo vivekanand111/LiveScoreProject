@@ -2,69 +2,63 @@ import { Match } from "./match";
 
 export const MATCHES: Match[]=[
     {
-        id: 1,
+        id: "1",
         teama:'ind',
         imagea: '/assets/images/India.png',
         teamb:'pak',
         imageb: '/assets/images/Pakistan.png',
-        date:'2/2/2',
+        date:null,
         location:'Hyderabad',
+        matchtype:'T20-international',
+        battingteam:'ind',
         winner:'0',
         status:'India Batting',
         live:true,
-        ascore:{
-            overs :10,
-            runs :36,
-            wickets :2  
-        },
-        bscore:{
-            overs :0,
-            runs :0,
-            wickets :0
-        }
+        aovers :20,
+        aruns :106,
+        awickets :2,
+        bovers :0,
+        bruns :0,
+        bwickets :0
     },
     {
-        id: 2,
+        id: "2",
         teama:'eng',
         imagea: '/assets/images/England.png',
         teamb:'pak',
         imageb: '/assets/images/Pakistan.png',
-        date:'2/2/2',
+        date:null,
         location:'Hyderabad',
+        matchtype:'ODI (One-Day International)',
+        battingteam:'pak',
         winner:'a',
         status:'Eng won',
         live:false,
-        ascore:{
-            overs :20,
-            runs :106,
-            wickets :2  
-        },
-        bscore:{
-            overs :20,
-            runs :105,
-            wickets :10
-        }
+        aovers :20,
+        aruns :106,
+        awickets :2,
+        bovers :20,
+        bruns :105,
+        bwickets :10
     },
     {
-        id: 3,
+        id: "3",
         teama:'ind',
         imagea: '/assets/images/India.png',
         teamb:'eng',
         imageb: '/assets/images/England.png',
-        date:'2/2/2',
+        date:null,
         location:'Hyderabad',
+        matchtype:'Test Cricket',
+        battingteam:'ind',
         winner:'d',
         status:'Draw Match',
         live:false,
-        ascore:{
-            overs :20,
-            runs :120,
-            wickets :2  
-        },
-        bscore:{
-            overs :20,
-            runs :120,
-            wickets :3
-        }
+        aovers :20,
+        aruns :106,
+        awickets :10,
+        bovers :20,
+        bruns :106,
+        bwickets :10
     }
 ]
