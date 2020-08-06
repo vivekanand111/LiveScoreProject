@@ -26,7 +26,6 @@ import 'hammerjs';
 import { AdminheaderComponent } from './adminheader/adminheader.component';
 import { CreatematchComponent } from './creatematch/creatematch.component';
 import { EditscoreComponent } from './editscore/editscore.component';
-import { FinishmatchComponent } from './finishmatch/finishmatch.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { MatchdetailsComponent } from './matchdetails/matchdetails.component'; 
 import { HeaderComponent } from './header/header.component';
@@ -55,7 +54,6 @@ import { HighlightDirective } from './directives/highlight.directive';
     AdminheaderComponent,
     CreatematchComponent,
     EditscoreComponent,
-    FinishmatchComponent,
     AdmindashboardComponent,
     MatchdetailsComponent,
     HighlightDirective

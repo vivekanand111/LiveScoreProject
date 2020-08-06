@@ -4,6 +4,9 @@ fxLayout="column"
 fxLayoutGap="10px">
 <h2>ScoreBoard--></h2>
   <br>
+  <div fxLayoutAlign="end">
+    <button mat-button (click)="refresh()" class="but text-floral-white">Refresh</button>
+  </div>
 <div fxFlex="75" *ngIf="match" [@visibility]="visibility" [@expand]>
 
   <mat-list>
@@ -12,6 +15,8 @@ fxLayoutGap="10px">
       <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>
       <p matLine>
         <span> {{match.status}} </span>
+        <br>
+        <span> {{match.date | date }} </span>
       </p>
       <div>
         <img matListAvatar src="{{ BaseURL + match.imageb}}" alt={{match.teamb}}>
@@ -20,13 +25,13 @@ fxLayoutGap="10px">
   </mat-list>
   <br>
   <div class="item-link">
-    <h2>{{match.teama}} Score :</h2>
+    <h2><span>&nbsp;&nbsp;</span>{{match.teama}} Score :</h2>
     <h1> {{ match.aruns }} / {{ match.aovers }} </h1>  
     <h1>Wickets: {{ match.awickets }} </h1>    
   </div>
   <br>
   <div class="item-link">
-    <h2>{{match.teamb}} Score :</h2>
+    <h2><span>&nbsp;&nbsp;</span>{{match.teamb}} Score :</h2>
     <h1> {{ match.bruns }} / {{ match.bovers }} </h1>  
     <h1>Wickets: {{ match.bwickets }} </h1>    
   </div>
@@ -41,14 +46,6 @@ fxLayoutGap="10px">
     </div>
     <p> {{ match.status }} </p>
   </div>
-</div>
-<div fxFlex>
-</div>
-<div fxFlex>
-  <p>  </p>
-  <button mat-button (click)="refresh()" class="but text-floral-white">Refresh</button>
-</div>
-<div fxFlex>
 </div>
 </div>
 <app-footer></app-footer>

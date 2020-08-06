@@ -10,6 +10,8 @@
       <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>
       <p matLine>
         <span> {{match.status}} </span>
+        <br>
+        <span> {{match.date | date }} </span>
       </p>
       <div>
         <img matListAvatar src="{{ BaseURL + match.imageb}}" alt={{match.teamb}}>

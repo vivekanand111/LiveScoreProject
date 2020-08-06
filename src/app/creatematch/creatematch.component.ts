@@ -111,6 +111,8 @@ export class CreatematchComponent implements OnInit {
   onSubmit() {
     this.match = this.matchForm.value;
     this.match.date = new Date().toISOString();
+    this.match.imagea="images/"+this.matchForm.value.teama+".png";
+    this.match.imageb="images/"+this.matchForm.value.teamb+".png";
     this.showForm = false;
     this.matchservice.postMatch(this.match)
       .subscribe(match => {

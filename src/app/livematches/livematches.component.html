@@ -3,7 +3,7 @@
 <div class="container"
      fxLayout="column"
      fxLayoutGap="10px" >
-     <div fxLayoutAlign="center">
+     <div fxLayoutAlign="end">
        <button mat-button (click)="refresh()" class="but text-floral-white">Refresh</button>
      </div>
   <div fxFlex *ngIf="matches" [@visibility]="visibility" [@expand]>
@@ -13,6 +13,8 @@
       <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>
       <p matLine>
         <span> {{match.status}} </span>
+        <br>
+        <span> {{match.date | date }} </span>
       </p>
       <div>
         <img matListAvatar src="{{ BaseURL + match.imageb}}" alt={{match.teamb}}>
