@@ -79,7 +79,9 @@ export class CreatematchComponent implements OnInit {
       awickets:0,
       bruns:0,
       bovers:0,
-      bwickets:0
+      bwickets:0,
+      adata:[],
+      bdata:[]
     });
 
     this.matchForm.valueChanges

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { Match } from '../shared/match';
 import { MatchService } from '../services/match.service';
 
-import { Params, ActivatedRoute } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { switchMap } from 'rxjs/operators';
 import { visibility, flyInOut, expand } from '../animations/app.animation';

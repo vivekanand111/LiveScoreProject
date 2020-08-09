@@ -42,6 +42,8 @@ import { AdminloginComponent } from './adminlogin/adminlogin.component';
 
 import { baseURL } from './shared/baseurl';
 import { HighlightDirective } from './directives/highlight.directive';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     EditscoreComponent,
     AdmindashboardComponent,
     MatchdetailsComponent,
-    HighlightDirective
+    HighlightDirective,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     MatSelectModule,
     MatSlideToggleModule,
     MatSliderModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    ChartsModule
   ],
   providers: [
     MatchService,

@@ -76,6 +76,8 @@ export class EditscoreComponent implements OnInit {
     .subscribe(match => {
       this.match = match;
       this.matchcopy = match;
+      this.matchcopy.adata=[];
+      this.matchcopy.bdata=[];
       console.log(this.matchcopy)
       this.visibility = 'shown';
     },
@@ -104,7 +106,9 @@ export class EditscoreComponent implements OnInit {
     this.matchcopy.aovers=Number(this.matchForm1.value.aovers);
     this.matchcopy.aruns=Number(this.matchForm1.value.aruns);
     this.matchcopy.awickets=Number(this.matchForm1.value.awickets);
-    console.log(this.matchcopy);
+    if(this.matchcopy.aovers%5==0 && this.matchcopy.aovers<21){
+      this.matchcopy.adata.push(this.matchcopy.aruns);
+    }
     this.matchservice.putMacth(this.matchcopy)
       .subscribe(match => {
         this.match = match; this.matchcopy = match;
@@ -117,6 +121,9 @@ export class EditscoreComponent implements OnInit {
     this.matchcopy.bovers=Number(this.matchForm2.value.bovers);
     this.matchcopy.bruns=Number(this.matchForm2.value.bruns);
     this.matchcopy.bwickets=Number(this.matchForm2.value.bwickets);
+    if(this.matchcopy.bovers%5==0 && this.matchcopy.aovers<21){
+      this.matchcopy.bdata.push(this.matchcopy.bruns);
+    }
     console.log(this.matchcopy);
     this.matchservice.putMacth(this.matchcopy)
       .subscribe(match => {

@@ -1,8 +1,17 @@
 <app-header></app-header>
+<div *ngIf="match.live == true">
+  <marquee><p>Match is running Live </p></marquee>
+</div>
 <div class="container"
 fxLayout="column"
 fxLayoutGap="10px">
 <h2>ScoreBoard--></h2>
+<div *ngIf="match.live == false">
+  <br>
+  <div fxLayoutAlign="end">
+    <button mat-button [routerLink]="['/statistics', match.id]" class="but text-floral-white">Statistics</button>
+  </div>
+</div>
   <br>
   <div fxLayoutAlign="end">
     <button mat-button (click)="refresh()" class="but text-floral-white">Refresh</button>
@@ -26,25 +35,40 @@ fxLayoutGap="10px">
   <br>
   <div class="item-link">
     <h2><span>&nbsp;&nbsp;</span>{{match.teama}} Score :</h2>
+    <h1>
+      <div *ngIf='match.battingteam == "Team1"'>
+        <p>Batting</p>
+      </div>
+    </h1>
     <h1> {{ match.aruns }} / {{ match.aovers }} </h1>  
     <h1>Wickets: {{ match.awickets }} </h1>    
   </div>
   <br>
   <div class="item-link">
     <h2><span>&nbsp;&nbsp;</span>{{match.teamb}} Score :</h2>
+    <h1>
+      <div *ngIf='match.battingteam == "Team2"'>
+        <p>Batting</p>
+      </div>
+    </h1>
     <h1> {{ match.bruns }} / {{ match.bovers }} </h1>  
     <h1>Wickets: {{ match.bwickets }} </h1>    
   </div>
   <br>
   <div class="item-link">
-    <p>Match at location {{match.location}} </p>
-    <div *ngIf="match.live == true">
-      <p>Match is running Live </p>
-    </div>
+    <p>Match at location : {{match.location}} </p>
     <div *ngIf="match.live == false">
       <p>Match Completed </p>
     </div>
     <p> {{ match.status }} </p>
+    <div *ngIf='match.winner != "None"'>
+      <div *ngIf='match.winner == "Team1"'>
+        <p>Winner : {{ match.teama }}</p>
+      </div>
+      <div *ngIf='match.winner == "Team2"'>
+        <p>Winner : {{ match.teamb }}</p>
+      </div>
+    </div>
   </div>
 </div>
 </div>

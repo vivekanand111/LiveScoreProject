@@ -7,6 +7,7 @@ import { AdmindashboardComponent } from '../admindashboard/admindashboard.compon
 import { CreatematchComponent } from '../creatematch/creatematch.component';
 import { EditscoreComponent } from '../editscore/editscore.component';
 import { MatchdetailsComponent } from '../matchdetails/matchdetails.component';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 export const routes: Routes = [
     { path: 'livematches', component: LivematchesComponent },
@@ -16,5 +17,6 @@ export const routes: Routes = [
     { path: 'creatematch', component: CreatematchComponent },
     { path: 'editscore/:id', component: EditscoreComponent },
     { path: 'matchdetail/:id', component: MatchdetailsComponent },
+    { path: 'statistics/:id', component: StatisticsComponent },
     { path: '', redirectTo: '/livematches', pathMatch: 'full' }
 ];

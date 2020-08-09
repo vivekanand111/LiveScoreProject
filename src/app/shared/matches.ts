@@ -19,7 +19,9 @@ export const MATCHES: Match[]=[
         awickets :2,
         bovers :0,
         bruns :0,
-        bwickets :0
+        bwickets :0,
+        adata:[1,2,3,4],
+        bdata:[1,2,3,4]
     },
     {
         id: "2",
@@ -39,7 +41,9 @@ export const MATCHES: Match[]=[
         awickets :2,
         bovers :20,
         bruns :105,
-        bwickets :10
+        bwickets :10,
+        adata:[1,2,3,4],
+        bdata:[1,2,3,4]
     },
     {
         id: "3",
@@ -59,6 +63,8 @@ export const MATCHES: Match[]=[
         awickets :10,
         bovers :20,
         bruns :106,
-        bwickets :10
+        bwickets :10,
+        adata:[1,2,3,4],
+        bdata:[1,2,3,4]
     }
 ]
