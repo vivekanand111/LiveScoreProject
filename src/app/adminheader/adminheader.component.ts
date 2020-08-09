@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-adminheader',
@@ -7,7 +7,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 })
 export class AdminheaderComponent implements OnInit {
 
-  constructor(@Inject('BaseURL') private BaseURL) { }
+  constructor() { }
 
   ngOnInit() {
   }
