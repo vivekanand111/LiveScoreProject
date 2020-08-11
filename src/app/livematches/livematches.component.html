@@ -10,7 +10,7 @@
     <p>No Live matches Now .</p>
   </div>
   <div fxFlex *ngIf="matches" [@visibility]="visibility" [@expand]>
-  <mat-list  *ngFor="let match of matches?.reverse()" >
+  <mat-list  *ngFor="let match of matches.slice().reverse()" >
     <mat-list-item *ngIf="match.live == true" [routerLink]="['/matchdetail', match.id]" appHighlight class="item-link">
       <img matListAvatar src="{{ BaseURL + match.imagea }}" alt={{match.teama}}>
       <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>

@@ -4,7 +4,7 @@
      fxLayout="column"
      fxLayoutGap="10px">
   <div fxFlex *ngIf="matches" [@expand]>
-  <mat-list *ngFor="let match of matches?.reverse()" >
+  <mat-list *ngFor="let match of matches.slice().reverse()" >
     <mat-list-item *ngIf="match.live == false" class="item-link" [routerLink]="['/matchdetail', match.id]" appHighlight>
       <img matListAvatar src="{{ BaseURL + match.imagea}}" alt={{match.teama}}>
       <h1 matLine> {{match.teama}} vs {{match.teamb}} </h1>
