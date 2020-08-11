@@ -21,6 +21,7 @@ export class LivematchesComponent implements OnInit {
 
   matches: Match[];
   errMess: string;
+  li:boolean;
   visibility = 'shown';
   selectedMatch: Match;
 
@@ -30,7 +31,14 @@ export class LivematchesComponent implements OnInit {
   ngOnInit() {
     this.visibility = 'hidden';
     this.matchService.getMatches()
-      .subscribe(matches => { this.matches = matches; this.visibility = 'shown'; },
+      .subscribe(matches => { this.matches = matches; this.visibility = 'shown';
+      this.li=false;
+      for(let i=0;i<matches.length;i++){
+        if(this.matches[i].live==true){
+          this.li=true;
+        }
+      }
+    },
         errmess => this.errMess = <any>errmess); 
   }
   onSelect(match: Match) {

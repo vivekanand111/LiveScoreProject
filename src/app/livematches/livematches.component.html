@@ -6,6 +6,9 @@
      <div fxLayoutAlign="end">
        <button mat-button (click)="refresh()" class="but text-floral-white">Refresh</button>
      </div>
+  <div *ngIf="li==false">
+    <p>No Live matches Now .</p>
+  </div>
   <div fxFlex *ngIf="matches" [@visibility]="visibility" [@expand]>
   <mat-list  *ngFor="let match of matches?.reverse()" >
     <mat-list-item *ngIf="match.live == true" [routerLink]="['/matchdetail', match.id]" appHighlight class="item-link">

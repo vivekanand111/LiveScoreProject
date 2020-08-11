@@ -1,12 +1,12 @@
 <app-header></app-header>
-<div *ngIf="match.live == true">
+<div *ngIf="li==true">
   <marquee><p>Match is running Live </p></marquee>
 </div>
 <div class="container"
 fxLayout="column"
 fxLayoutGap="10px">
 <h2>ScoreBoard--></h2>
-<div *ngIf="match.live == false">
+<div *ngIf="li==false">
   <br>
   <div fxLayoutAlign="end">
     <button mat-button [routerLink]="['/statistics', match.id]" class="but text-floral-white">Statistics</button>

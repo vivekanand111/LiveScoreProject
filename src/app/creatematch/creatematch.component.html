@@ -1,4 +1,7 @@
 <app-adminheader></app-adminheader>
+<div class="container"
+fxLayout="column"
+fxLayoutGap="10px">
 <div fxFlex fxFlexOffset="20px" class="form-size">
   <h3>Enter Match</h3>
 <form novalidate [formGroup]="matchForm" #fform="ngForm" (ngSubmit)="onSubmit()" *ngIf="showForm" [@expand]>
@@ -65,4 +68,5 @@
   <div *ngIf="submitted" [@expand]>
     <button type="submit" [routerLink]="['/editscore', submitted.id]" mat-button class="background-primary text-floral-white">Edit Scores</button>
   </div>
+</div>
 </div>

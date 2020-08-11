@@ -26,6 +26,7 @@ export class MatchdetailsComponent implements OnInit {
 
   match: Match;
   errMess: string;
+  li:boolean;
   matchIds: string[];
 
   visibility = 'shown';
@@ -40,7 +41,7 @@ export class MatchdetailsComponent implements OnInit {
       subscribe(matchIds => this.matchIds = matchIds);
     this.route.params
       .pipe(switchMap((params: Params) => { this.visibility = 'hidden'; return this.matchservice.getMatch(params['id']);}))
-      .subscribe(match => { this.match = match; this.visibility = 'shown'; },
+      .subscribe(match => { this.match = match; this.li=this.match.live; this.visibility = 'shown'; },
         errmess => this.errMess = <any>errmess );
   }
   refresh(){
